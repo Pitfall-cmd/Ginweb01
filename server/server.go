@@ -34,7 +34,9 @@ func (t *TodoServer)initGruopRouters()  {
 		v1Group.DELETE("/todo/:id",t.deleteTodoHandler)
 	}
 	t.srv.NoRoute(func(c *gin.Context) {
-		c.Redirect(http.StatusMovedPermanently,"http://localhost:8080/index")
+		//c.Redirect(http.StatusMovedPermanently,"http://localhost:8080/index")
+ 	        c.Request.URL.Path="/index"
+                 t.srv.HandleContext(c)
 	})
 }
 func (t*TodoServer)ListenAndServe(addr string) (<-chan error,error)  {
@@ -58,7 +60,7 @@ func (t*TodoServer)ShutDown()  {
 
 func (t* TodoServer)loadStaticResource()  {
 	t.srv.Static("/static","./static")
-	t.srv.LoadHTMLGlob("./templates/*")
+	t.srv.LoadHTMLGlob("templates/*")
 }
 
 func (t* TodoServer)getIndexHandler(c*gin.Context)  {
