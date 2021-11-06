@@ -34,17 +34,9 @@ func (t *TodoServer)initGruopRouters()  {
 		v1Group.DELETE("/todo/:id",t.deleteTodoHandler)
 	}
 	t.srv.NoRoute(func(c *gin.Context) {
-<<<<<<< HEAD
-		c.Redirect(http.StatusMovedPermanently,"http://localhost:8080/index")
-=======
-<<<<<<< HEAD
-		//c.Redirect(http.StatusMovedPermanently,"http://localhost:8080/index")
- 	        c.Request.URL.Path="/index"
-                 t.srv.HandleContext(c)
-=======
-		c.Redirect(http.StatusMovedPermanently, "http://localhost:8080/index")
->>>>>>> b93133e16e712a527f73e0f42ec31294605f67a8
->>>>>>> f98aeb2428b5016cf1a2c8a18be82a91d2345961
+		c.Request.URL.Path="/index"
+		t.srv.HandleContext(c)
+
 	})
 }
 func (t*TodoServer)ListenAndServe(addr string) (<-chan error,error)  {
@@ -66,18 +58,8 @@ func (t*TodoServer)ShutDown()  {
 
 }
 
-<<<<<<< HEAD
-func (t* TodoServer)loadStaticResource()  {
-	t.srv.Static("/static","./static")
-=======
-<<<<<<< HEAD
-func (t* TodoServer)loadStaticResource()  {
-	t.srv.Static("/static","./static")
-=======
 func (t *TodoServer) loadStaticResource() {
 	t.srv.Static("/static", "./static")
->>>>>>> b93133e16e712a527f73e0f42ec31294605f67a8
->>>>>>> f98aeb2428b5016cf1a2c8a18be82a91d2345961
 	t.srv.LoadHTMLGlob("templates/*")
 }
 
