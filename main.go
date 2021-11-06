@@ -1,7 +1,10 @@
 package main
 
 /*
+<<<<<<< HEAD
+=======
 这里是原先的cmd/version2/main.go 因为go run main.go时 文件路径的问题，所以把main移到最外层
+>>>>>>> b93133e16e712a527f73e0f42ec31294605f67a8
 这个是经过修改之后的重新封装的main，在这里只有启动初始化等工作
 */
 import (
@@ -15,6 +18,22 @@ import (
 )
 
 func main() {
+<<<<<<< HEAD
+	db,err:=factory.New("mysql")
+	if err!=nil {
+		panic(err)
+	}
+	srv:=server.NewTodoServer(db)
+	errChan,err:=srv.ListenAndServe(":8080")
+	if err!=nil{
+		log.Println("Web server start failer :",err)
+	}
+	c:=make(chan os.Signal,1)
+	signal.Notify(c,syscall.SIGINT,syscall.SIGTERM)
+	select { //监听来自errChan和c的事件
+	case err=<-errChan:
+		log.Println("web server run failed:",err)
+=======
 	db, err := factory.New("mysql")
 	if err != nil {
 		panic(err)
@@ -29,9 +48,14 @@ func main() {
 	select { //监听来自errChan和c的事件
 	case err = <-errChan:
 		log.Println("web server run failed:", err)
+>>>>>>> b93133e16e712a527f73e0f42ec31294605f67a8
 	case <-c:
 		log.Println("web program is exiting....")
 		srv.ShutDown()
 	}
 	log.Println("bookstore program exit ok")
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b93133e16e712a527f73e0f42ec31294605f67a8
