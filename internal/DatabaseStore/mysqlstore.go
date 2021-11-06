@@ -40,6 +40,9 @@ func (m *Mysql) CreateATodo(todo *store.Todo) error {
 func (m *Mysql) UpdateATodo(todo *store.Todo) error {
 	m.Lock()
 	defer m.Unlock()
+	var temptodo store.Todo
+	db.Where("id=?",todo.ID).Find(&temptodo)
+	todo.Title=temptodo.Title
 	err=db.Save(todo).Error
 	if err!=nil{
 		return err
